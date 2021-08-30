@@ -4,11 +4,10 @@ import java.sql.PreparedStatement;
 
 public class Producto {
 
-	    private Producto() {
-	    }
+	private Producto() {
+	}
 
-
-	    public static String insert(String nombre, String descripcion, int idCategoria, int idFabricante, int ean, String usos, int peso, String dimension,int calibre ) {
+	public static String insert(String nombre, String descripcion, int idCategoria, int idFabricante, int ean, String usos, int peso, String dimension,int calibre ) {
 
 	        StringBuilder mensaje = new StringBuilder();
 	        Connection connection = BD.getConexion();
@@ -27,20 +26,18 @@ public class Producto {
 	                consulta.setString(6, usos);
 	                consulta.setInt(7, peso);
 	                consulta.setString(8, dimension);
-	                consulta.setInt(9,calibre);
-	                
+	                consulta.setInt(9,calibre);	                
 
-	              /*  int nuevaPoliza = consulta.executeUpdate();
-	                if (nuevaPoliza > 0) {
-	                    mensaje.append(Color.dialogo("Se ha insertado la póliza número:010098 Titular:Filemón Pi Ramo:HOGAR Prima:350.00€"));
-	                } else {
-	                    mensaje.append(Color.error("ERROR no se puede insertar esa póliza."));
+	              int nuevoProducto = consulta.executeUpdate();
+	                if (nuevoProducto > 0) {
+	                	mensaje.append("Se ha insertado el producto con éxito");
+	                
+	            }else {
+	            	 mensaje.append("ERROR. No se ha insertado ningún producto");
 	            } catch (SQLException sqle) {
-	                mensaje.append(Color.error("ERROR no se puede insertar esa póliza."));
+	                mensaje.append("ERROR. No se ha insertado el producto");
 	            }
 	        }
 	        return mensaje.toString();
 
 	    }
-
-}
